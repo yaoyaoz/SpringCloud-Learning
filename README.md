@@ -42,7 +42,25 @@ eureka-consumer
 
 ## 三、服务消费者（Ribbon）
 
+利用之前构建的`eureka-server`作为服务注册中心、`eureka-client`作为服务提供者作为基础。
 
+基于Spring Cloud Ribbon实现的消费者，我们可以根据eureka-consumer实现的内容进行简单改造就能完成。
+
+1、创建服务消费者工程：
+
+`eureka-consumer-ribbon`：基于eureka-consumer
+
+1）、添加依赖spring-cloud-starter-ribbon
+
+2）、修改应用主类。为RestTemplate增加@LoadBalanced注解
+
+3）、修改Controller。去掉原来通过`LoadBalancerClient`选取实例和拼接URL的步骤，直接通过RestTemplate发起请求
+
+4）、启动Application，访问：localhost:2201/consumer
+
+也可以通过启动多个eureka-client服务来观察其负载均衡的效果。
+
+## 四、服务消费者（Feign）
 
 
 
