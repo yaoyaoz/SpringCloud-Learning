@@ -66,7 +66,7 @@ eureka-consumer
 
 1、创建服务消费者工程：
 
-eureka-consumer-feign：基于eureka-consumer
+`eureka-consumer-feign`：基于eureka-consumer
 
 1）、添加依赖spring-cloud-starter-feign
 
@@ -82,9 +82,13 @@ eureka-consumer-feign：基于eureka-consumer
 
 ## 五、服务消费者（Feign）传文件
 
+利用之前构建的`eureka-server`作为服务注册中心
 
+服务提供方（接收文件）：`eureka-feign-upload-server`
 
+服务消费方（发送文件）：`eureka-feign-upload-client` 测试用例：com.springcloud.UploadTester#testHandleFileUpload
 
+## 六、分布式配置中心
 
 
 

@@ -36,6 +36,8 @@
         <module>eureka-consumer-ribbon</module>
         <module>eureka-consumer-feign</module>
         <module>eureka-client2</module>
+        <module>eureka-feign-upload-server</module>
+        <module>eureka-feign-upload-client</module>
     </modules>
 
 </project>
