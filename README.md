@@ -92,5 +92,42 @@ eureka-consumer
 
 
 
+基于Git仓库的配置中心：`config-server-git`
+使用配置中心的客户端：`config-client`
+
+### 1）准备配置仓库
+
+https://github.com/yaoyaoz/SpringCloud-config-repo-demo
+
+假设我们读取配置中心的应用名为config-client，那么我们可以在git仓库中该项目的默认配置文件`config-client.yml`；
+
+为了演示加载不同环境的配置，我们可以在git仓库中再创建一个针对dev环境的配置文件`config-client-dev.yml`
+
+### 2）构建配置中心
+
+1、创建一个基础的springBoot工程：`config-server-git`，并添加依赖spring-cloud-config-server
+
+2、主类添加`@EnableConfigServer`注解，开启Spring Cloud Config的服务端功能
+
+3、在application.yml中添加配置服务的基本信息以及Git仓库的相关信息
+
+4、启动，访问：http://localhost:1201/config-client/dev/master【/{application}/{profile}[/{label}]，映射{application}-{profile}.properties对应的配置文件，其中{label}对应Git上不同的分支，默认为master】，获得如下返回：
+
+![config获取git配置文件参数](/images/001-config获取git配置文件参数.png "config获取git配置文件参数")
+
+### 3）构建客户端
+
+1、创建工程`config-client`，依赖spring-cloud-starter-config
+
+2、启动config-server-git和config-client，访问localhost:1202/info，<font color="red">但是没返回git仓库的配置信息</font>
+
+## 七、分布式配置中心（加密与解密）【略】
+
+## 八、分布式配置中心（高可用与动态刷新）【略】
+
+## 九、服务容错保护(Hystrix服务降级)
+
+
+
 
 

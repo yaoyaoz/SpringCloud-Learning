@@ -1,0 +1,18 @@
+#spring.application.name：对应配置文件规则中的{application}部分
+#spring.cloud.config.profile：对应配置文件规则中的{profile}部分
+#spring.cloud.config.label：对应配置文件规则中的{label}部分
+#spring.cloud.config.uri：配置中心config-server的地址
+
+#这里需要格外注意：上面这些属性必须配置在bootstrap.properties中，这样config-server中的配置信息才能被正确加载
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      uri: http://localhost:1201/
+      profile: dev
+      label: master
+
+server:
+  port: 1202
