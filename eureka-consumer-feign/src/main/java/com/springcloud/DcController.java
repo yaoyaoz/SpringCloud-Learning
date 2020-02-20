@@ -16,18 +16,12 @@ import org.springframework.web.client.RestTemplate;
 public class DcController {
 
     @Autowired
-    LoadBalancerClient loadBalancerClient;
-
-    @Autowired
-    RestTemplate restTemplate;
+    DcClient dcClient;
 
     //消费eureka-client提供的接口
     @GetMapping("/consumer")
     public String dc() {
-        ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
-        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/dc";
-        System.out.println(url);
-        return restTemplate.getForObject(url, String.class);
+        return dcClient.consumer();
     }
 
 }

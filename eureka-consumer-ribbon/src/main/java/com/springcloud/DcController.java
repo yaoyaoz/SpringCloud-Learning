@@ -22,7 +22,7 @@ public class DcController {
     RestTemplate restTemplate;
 
     //消费eureka-client提供的接口
-    @GetMapping("consumer")
+    @GetMapping("/consumer")
     public String dc() {
 //        ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
 //        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/dc";

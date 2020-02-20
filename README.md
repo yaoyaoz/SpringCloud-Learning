@@ -58,9 +58,35 @@ eureka-consumer
 
 4）、启动Application，访问：localhost:2201/consumer
 
-也可以通过启动多个eureka-client服务来观察其负载均衡的效果。
+也可以通过启动多个eureka-client服务来观察其负载均衡的效果：eureka-client2（复制eureka-client）
 
 ## 四、服务消费者（Feign）
+
+利用之前构建的`eureka-server`作为服务注册中心、`eureka-client`作为服务提供者作为基础。
+
+1、创建服务消费者工程：
+
+eureka-consumer-feign：基于eureka-consumer
+
+1）、添加依赖spring-cloud-starter-feign
+
+2）、修改应用主类。通过@EnableFeignClients注解开启扫描Spring Cloud Feign客户端的功能
+
+3）、创建一个Feign的客户端接口定义：DcClient
+
+4）、修改Controller。通过定义的feign客户端来调用服务提供方的接口
+
+5）、启动，访问：localhost:2301/consumer
+
+也可以通过启动多个eureka-client服务来观察其负载均衡的效果：eureka-client2
+
+## 五、服务消费者（Feign）传文件
+
+
+
+
+
+
 
 
 
