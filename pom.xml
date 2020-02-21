@@ -44,6 +44,7 @@
         <module>hystrix-dashboard</module>
         <module>turbine</module>
         <module>eureka-consumer-ribbon-hystrix2</module>
+        <module>api-gateway</module>
     </modules>
 
 </project>

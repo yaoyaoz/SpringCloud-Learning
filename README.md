@@ -202,16 +202,25 @@ eureka-client工程：服务提供者
 
 用到的项目：
 
+>eureka-server
 >eureka-client
 >eureka-consumer
 
 构建服务网关：
 
-1、创建springBoot项目：`api-gateway`
+1、创建springBoot项目：`api-gateway`（端口：1101）
 
 2、添加依赖：spring-cloud-starter-zuul
 
 3、应用主类使用@EnableZuulProxy注解开启Zuul的功能
 
-4、
+4、启动，访问：（api-gateway就具备了默认的服务路由功能）
+
+http://localhost:1101/eureka-client/dc
+
+http://localhost:1101/eureka-consumer/consumer
+
+## 十五、服务网关（路由配置）
+
+
 
