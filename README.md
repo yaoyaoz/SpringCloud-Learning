@@ -127,6 +127,25 @@ https://github.com/yaoyaoz/SpringCloud-config-repo-demo
 
 ## 九、服务容错保护(Hystrix服务降级)
 
+eureka-server工程：服务注册中心
+eureka-client工程：服务提供者
+
+`eureka-consumer-ribbon-hystrix`：复制eureka-consumer-ribbon，改造下：
+
+1、添加依赖：spring-cloud-starter-hystrix
+
+2、在应用主类中使用@EnableCircuitBreaker或@EnableHystrix注解开启Hystrix的使用
+
+3、改造服务消费方式，新增ConsumerService类，然后将在Controller中的逻辑迁移过去。最后，在为具体执行逻辑的函数上增加@HystrixCommand注解来指定服务降级方法
+
+4、启动，访问：http://localhost:2601/consumer。
+
+如果eureka-client启动了，可以正常返回；
+
+如果eureka-client没启动，eureka-consumer-ribbon-hystrix调不通就会返回com.springcloud.DcController.ConsumerService#fallback的内容，<font color="red">但是没有打印异常日志</font>
+
+## 十、服务容错保护(Hystrix依赖隔离)
+
 
 
 

@@ -40,6 +40,7 @@
         <module>eureka-feign-upload-client</module>
         <module>config-server-git</module>
         <module>config-client</module>
+        <module>eureka-consumer-ribbon-hystrix</module>
     </modules>
 
 </project>
