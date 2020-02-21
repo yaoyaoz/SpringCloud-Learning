@@ -90,8 +90,6 @@ eureka-consumer
 
 ## 六、分布式配置中心
 
-
-
 基于Git仓库的配置中心：`config-server-git`
 使用配置中心的客户端：`config-client`
 
@@ -123,7 +121,7 @@ https://github.com/yaoyaoz/SpringCloud-config-repo-demo
 
 ## 七、分布式配置中心（加密与解密）【略】
 
-## 八、分布式配置中心（高可用与动态刷新）【略】
+## 八、分布式配置中心（高可用与动态刷新）【暂略】
 
 ## 九、服务容错保护(Hystrix服务降级)
 
@@ -142,11 +140,78 @@ eureka-client工程：服务提供者
 
 如果eureka-client启动了，可以正常返回；
 
-如果eureka-client没启动，eureka-consumer-ribbon-hystrix调不通就会返回com.springcloud.DcController.ConsumerService#fallback的内容，<font color="red">但是没有打印异常日志</font>
+如果eureka-client没启动（也可以在eureka-client的接口里面sleep 5秒，但是没看到hystrix的默认超时时间是多少？），eureka-consumer-ribbon-hystrix调不通就会返回com.springcloud.DcController.ConsumerService#fallback的内容，<font color="red">但是没有打印异常日志</font>
 
 ## 十、服务容错保护(Hystrix依赖隔离)
 
+@HystrixCommand注解将某个函数包装成了Hystrix命令，这里除了定义`服务降级`之外，Hystrix框架就会自动的为这个函数实现调用的隔离。所以，`依赖隔离`、`服务降级`在使用时候都是一体化实现的。除了依赖隔离、服务降级之外，还有一个重要元素：`断路器`。我们将在下一篇做详细的介绍，这三个重要利器构成了Hystrix实现服务容错保护的强力组合拳。
 
+## 十一、服务容错保护(Hystrix断路器)
 
+这里涉及到断路器的三个重要参数：快照时间窗、请求总数下限、错误百分比下限。
 
+<font color="red">这些参数在哪里配置呢？</font>
+
+## 十二、Hystrix监控面板
+
+将用到下之前实现的几个应用：
+
+>eureka-server：服务注册中心
+>eureka-client：服务提供者
+>eureka-consumer-ribbon-hystrix：使用ribbon和hystrix实现的服务消费者
+
+在Spring Cloud中构建一个Hystrix Dashboard：
+
+1、创建一个springBoot工程：`hystrix-dashboard`【用于展示eureka-consumer-ribbon-hystrix服务的Hystrix数据】
+
+2、为应用主类加上@EnableHystrixDashboard，启用Hystrix Dashboard功能
+
+3、启动，访问：http://localhost:2701/hystrix，可以看到监控首页
+
+=>输入：http://localhost:2601/hystrix.stream【实现对具体某个服务实例的监控】
+
+=>点击“Monitor Stream”按钮，就能看到2601这个端口的服务监控页面，如果没调用数据展示，可以访问下http://localhost:2601/consumer
+
+## 十三、Hystrix监控数据聚合
+
+我们构建的内容包括：
+
+>eureka-server：服务注册中心
+>eureka-client：服务提供者
+>eureka-consumer-ribbon-hystrix：使用ribbon和hystrix实现的服务消费者
+>eureka-consumer-ribbon-hystrix2：复制的eureka-consumer-ribbon-hystrix，改了下端口号
+>hystrix-dashboard：用于展示eureka-consumer-ribbon-hystrix服务的Hystrix数据
+
+引入Turbine来对服务的Hystrix数据进行聚合展示
+
+### 通过HTTP收集聚合
+
+1、创建就springBoot工程：`turbine`
+
+2、添加依赖：spring-cloud-starter-turbine
+
+3、应用主类使用@EnableTurbine注解开启Turbine
+
+4、application.properties加入eureka和turbine的相关配置
+
+5、启动，访问：http://localhost:2701/hystrix，开启对http://localhost:8989/turbine.stream的监控，我们将看到针对服务`eureka-consumer-ribbon-hystrix`的聚合监控数据。
+
+### 通过消息代理收集聚合【暂略】
+
+## 十四、服务网关（基础）
+
+用到的项目：
+
+>eureka-client
+>eureka-consumer
+
+构建服务网关：
+
+1、创建springBoot项目：`api-gateway`
+
+2、添加依赖：spring-cloud-starter-zuul
+
+3、应用主类使用@EnableZuulProxy注解开启Zuul的功能
+
+4、
 

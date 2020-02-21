@@ -41,6 +41,9 @@
         <module>config-server-git</module>
         <module>config-client</module>
         <module>eureka-consumer-ribbon-hystrix</module>
+        <module>hystrix-dashboard</module>
+        <module>turbine</module>
+        <module>eureka-consumer-ribbon-hystrix2</module>
     </modules>
 
 </project>
