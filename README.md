@@ -222,5 +222,54 @@ http://localhost:1101/eureka-consumer/consumer
 
 ## 十五、服务网关（路由配置）
 
+路由地址映射配置
 
+## 十六、服务网关（过滤器）
+
+用到的项目：
+
+>eureka-server
+>eureka-client
+
+1、创建项目`api-gateway-with-eureka`：复制api-gateway
+
+2、实现自定义过滤器，继承ZuulFilter并重写四个方法
+
+3、在实现了自定义过滤器之后，它并不会直接生效，我们还需要为其创建具体的Bean才能启动该过滤器
+
+4、application.properties：给eureka-client配置路由映射地址为/api-a/**
+
+5、启动，访问：
+
+http://localhost:1102/api-a/dc，返回401错误
+
+http://localhost:1102/api-a/dc?accessToken=token：正确路由到eureka-client的dc接口
+
+## 十七、服务网关（API文档汇总）
+
+需要用到的应用：
+
+> eureka-server
+
+1、创建两个springCloud微服务：`swagger-service-a`和`swagger-service-b`
+
+2、引入eureka的依赖、web模块的依赖以及swagger的依赖（这里使用了我们自己构建的starter）
+
+3、@EnableSwagger2Doc
+
+构建API网关并整合Swagger：
+
+1、创建项目：`swagger-api-gateway`
+
+2、引入swagger的依赖
+
+3、应用主类中配置swagger，实现DocumentationConfig接口
+
+4、启动，测试验证：localhost:11000/swagger-ui.html，可以选择a或者b的文档
+
+【也可以单独访问a和b两个应该系统的swagger页面：
+
+localhost:10010/swagger-ui.html、localhost:10020/swagger-ui.html】
+
+## 十八、消息驱动的微服务（入门）
 
