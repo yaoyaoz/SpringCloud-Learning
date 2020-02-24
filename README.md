@@ -273,3 +273,24 @@ localhost:10010/swagger-ui.html、localhost:10020/swagger-ui.html】
 
 ## 十八、消息驱动的微服务（入门）
 
+使用消息中间件RabbitMQ来接收消息并将消息打印到日志中：
+
+1、创建项目`stream-hello`
+
+2、引入依赖：spring-cloud-starter-stream-rabbit
+
+3、创建用于接收来自RabbitMQ消息的消费者SinkReceiver
+
+4、启动【本地把rabbitmq的服务也启动起来】，
+
+mq的web地址：http://localhost:15672
+
+可以看到input...的一个队列=>publish message=>com.springcloud.SinkReceiver#receive就会收到这条消息
+
+#### 编写消费消息的单元测试用例
+
+SinkApplicationTests
+
+先启动stream-hello，再运行单元测试发送mq消息，stream-hello会接收到该条消息
+
+## 十九、消息驱动的微服务（核心概念）

@@ -49,6 +49,7 @@
         <module>swagger-service-a</module>
         <module>swagger-service-b</module>
         <module>swagger-api-gateway</module>
+        <module>stream-hello</module>
     </modules>
 
 </project>
