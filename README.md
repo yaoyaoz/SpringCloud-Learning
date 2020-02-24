@@ -294,3 +294,16 @@ SinkApplicationTests
 先启动stream-hello，再运行单元测试发送mq消息，stream-hello会接收到该条消息
 
 ## 十九、消息驱动的微服务（核心概念）
+
+Binder绑定器
+
+发布-订阅模式 Topic（RabbitMQ的Exchange）
+
+消费组
+
+消息分区
+
+## 二十、消息驱动的微服务（消费组）
+
+
+
