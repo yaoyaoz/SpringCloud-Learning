@@ -10,7 +10,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @Description: 消费消息的单元测试用例
+ * @Description: 消费消息的单元测试用例：消息生产者
  * @author: yaoyao
  * @date 2020-02-24
  */

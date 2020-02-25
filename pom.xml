@@ -50,6 +50,9 @@
         <module>swagger-service-b</module>
         <module>swagger-api-gateway</module>
         <module>stream-hello</module>
+        <module>stream-group-producer</module>
+        <module>stream-group-consumer</module>
+        <module>stream-group-consumer2</module>
     </modules>
 
 </project>

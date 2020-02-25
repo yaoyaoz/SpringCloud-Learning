@@ -305,5 +305,30 @@ Binder绑定器
 
 ## 二十、消息驱动的微服务（消费组）
 
+【同一个分组下，只会有一个实例对其进行消费。】
 
+1、生产者：`stream-group-producer`
 
+启动后，SinkSender会一直发送消息
+
+配置：spring.cloud.stream.bindings.output.destination=greetings
+
+2、消费者：`stream-group-consumer`（复制stream-hello修改）
+
+```
+spring.cloud.stream.bindings.input.group=Service-A
+spring.cloud.stream.bindings.input.destination=greetings
+```
+
+复制stream-group-consumer为`stream-group-consumer2`，配置跟stream-group-consumer一样
+
+```
+spring.cloud.stream.bindings.input.group=Service-A
+spring.cloud.stream.bindings.input.destination=greetings
+```
+
+3、启动，验证：
+
+分别运行上面实现的生产者与消费者，其中消费者我们启动多个实例。通过控制台，我们可以发现每个生产者发出的消息，会被启动的消费者以轮询的方式进行接收和输出。【因为消费者配置的同一个分组Service-A；如果其中一个消费者配置成其他分组Service-B，也会收到消息】
+
+## 二十一、消息驱动的微服务（消息分区）
