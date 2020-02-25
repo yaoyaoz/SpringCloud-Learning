@@ -332,3 +332,7 @@ spring.cloud.stream.bindings.input.destination=greetings
 分别运行上面实现的生产者与消费者，其中消费者我们启动多个实例。通过控制台，我们可以发现每个生产者发出的消息，会被启动的消费者以轮询的方式进行接收和输出。【因为消费者配置的同一个分组Service-A；如果其中一个消费者配置成其他分组Service-B，也会收到消息】
 
 ## 二十一、消息驱动的微服务（消息分区）
+
+配置了没生效样，spring.cloud.stream.bindings.output.producer.partitionKeyExpression=payload不知道这个key是什么规则
+
+## 二十二、分布式服务跟踪（入门）
